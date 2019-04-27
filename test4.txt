@@ -1,0 +1,44 @@
+package Base;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+
+public class Generic_Class {
+	static String Browser,ImplicitWait;
+	public static void main(String[] args)
+	{
+		launchbrowser();
+	}
+	public static void init() throws IOException
+	{
+		try {
+			FileInputStream file = new FileInputStream("H:\\Latest_Framework\\gb\\src\\main\\java\\Base\\data.prop");
+			Properties prop = new Properties();
+			prop.load(file);
+			Browser = prop.getProperty("BrowserType");
+			String ImplicitWait = prop.getProperty("ImplicitWait");
+						
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	static WebDriver driver;
+	public static void launchbrowser()
+	{
+		try {
+			init();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(Browser);
+		System.out.println(ImplicitWait);
+	}
+
+}
