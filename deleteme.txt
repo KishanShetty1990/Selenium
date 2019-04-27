@@ -1,0 +1,75 @@
+package Pages;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+
+import Base.Generic_Class;
+
+
+public class Login_Page extends Generic_Class{
+	
+	static WebDriver driver;
+	static String username,password;
+	static String username_xpath,password_xpath,signin_xpath;
+	
+	
+	public static void main(String[] args) {
+		Login_Page lp = new Login_Page(driver);
+		lp.launchbrowser();
+		lp.launchURL();
+		
+	}
+	public static void init() throws IOException
+	{
+		try {
+			FileInputStream file = new FileInputStream("H:\\Latest_Framework\\gb\\src\\main\\java\\Pages\\login.prop");
+			Properties prop = new Properties();
+			prop.load(file);
+			username = prop.getProperty("username");
+			password = prop.getProperty("password");
+			System.out.println(username);
+			System.out.println(password);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+		
+		public static void initxpath() throws IOException
+		{
+			try {
+				FileInputStream file = new FileInputStream("H:\\Latest_Framework\\gb\\src\\main\\java\\Pages\\loginxpath.prop");
+				Properties prop = new Properties();
+				prop.load(file);
+				username_xpath = prop.getProperty("username_xpath");
+				password_xpath = prop.getProperty("password_xpath");
+				signin_xpath = prop.getProperty("signin_xpath");
+				System.out.println(username_xpath);
+				System.out.println(password_xpath);
+				System.out.println(signin_xpath);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+		public Login_Page(WebDriver driver)
+		{
+			this.driver = driver;
+			try {
+				Login_Page.init();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				Login_Page.initxpath();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		}
+}
